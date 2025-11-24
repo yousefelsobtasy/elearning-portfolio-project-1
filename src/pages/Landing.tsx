@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { BookOpen, Users, Award } from "lucide-react";
+import { FlaskConical, Users, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-learning.jpg";
 
@@ -9,19 +9,19 @@ const Landing = () => {
 
   const features = [
     {
-      icon: BookOpen,
-      title: "Expert-Led Courses",
-      description: "Learn from industry professionals with real-world experience"
+      icon: FlaskConical,
+      title: "Interactive Chemistry Lessons",
+      description: "Master chemistry concepts through engaging, visual learning experiences"
     },
     {
       icon: Users,
-      title: "Community Learning",
-      description: "Join thousands of learners on their journey to mastery"
+      title: "Collaborative Learning",
+      description: "Connect with fellow chemistry students and share insights"
     },
     {
-      icon: Award,
-      title: "Earn Certificates",
-      description: "Showcase your achievements with recognized certifications"
+      icon: Sparkles,
+      title: "Expert Guidance",
+      description: "Learn from experienced chemistry educators with proven teaching methods"
     }
   ];
 
@@ -34,10 +34,10 @@ const Landing = () => {
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <div className="text-white space-y-6">
               <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-                Master New Skills<br />at Your Own Pace
+                Master Chemistry<br />Your Way
               </h1>
               <p className="text-lg md:text-xl text-white/90 max-w-lg">
-                Join our community of learners and unlock your potential with beginner-friendly courses in coding, design, and technology.
+                Explore the fascinating world of chemistry through interactive courses designed to make learning engaging and accessible.
               </p>
               <Button 
                 size="lg" 
@@ -63,7 +63,7 @@ const Landing = () => {
       <section className="py-20 bg-secondary/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Why Choose LearnHub?
+            Why Chemistry Hub?
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
             {features.map((feature, index) => (
@@ -89,7 +89,7 @@ const Landing = () => {
             Ready to Start Learning?
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join thousands of students already learning on LearnHub. Start your journey today!
+            Join fellow students in discovering the wonders of chemistry. Start your journey today!
           </p>
           <Button 
             size="lg" 

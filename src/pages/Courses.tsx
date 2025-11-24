@@ -1,84 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Course {
   id: string;
   title: string;
   description: string;
   difficulty: "Beginner" | "Intermediate" | "Advanced";
-  category: string;
-  lessons: number;
+  lessons?: { count: number }[];
 }
 
 const Courses = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [courses, setCourses] = useState<Course[]>([]);
 
-  const courses: Course[] = [
-    {
-      id: "1",
-      title: "Introduction to Web Development",
-      description: "Learn the fundamentals of HTML, CSS, and JavaScript to build your first website",
-      difficulty: "Beginner",
-      category: "Web Development",
-      lessons: 12
-    },
-    {
-      id: "2",
-      title: "React Fundamentals",
-      description: "Master React basics and build interactive user interfaces",
-      difficulty: "Intermediate",
-      category: "Web Development",
-      lessons: 15
-    },
-    {
-      id: "3",
-      title: "UI/UX Design Principles",
-      description: "Learn to create beautiful and user-friendly interfaces",
-      difficulty: "Beginner",
-      category: "Design",
-      lessons: 10
-    },
-    {
-      id: "4",
-      title: "Python for Beginners",
-      description: "Start your programming journey with Python",
-      difficulty: "Beginner",
-      category: "Programming",
-      lessons: 18
-    },
-    {
-      id: "5",
-      title: "Advanced JavaScript",
-      description: "Deep dive into async programming, closures, and design patterns",
-      difficulty: "Advanced",
-      category: "Web Development",
-      lessons: 20
-    },
-    {
-      id: "6",
-      title: "Data Structures & Algorithms",
-      description: "Master essential computer science concepts",
-      difficulty: "Intermediate",
-      category: "Programming",
-      lessons: 25
-    }
-  ];
+  useEffect(() => {
+    fetchCourses();
+  }, []);
 
-  const categories = ["All", ...Array.from(new Set(courses.map(c => c.category)))];
+  const fetchCourses = async () => {
+    const { data } = await supabase
+      .from('courses')
+      .select('*, lessons(count)');
+    
+    if (data) setCourses(data as any);
+  };
 
-  const filteredCourses = courses.filter(course => {
-    const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         course.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || course.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filteredCourses = courses.filter(course =>
+    course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    (course.description?.toLowerCase() || '').includes(searchQuery.toLowerCase())
+  );
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
@@ -115,18 +72,6 @@ const Courses = () => {
             />
           </div>
           
-          <div className="flex gap-2 flex-wrap">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category)}
-                className="rounded-full"
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
         </div>
 
         {/* Course Grid */}
@@ -151,7 +96,7 @@ const Courses = () => {
                 
                 <div className="flex items-center justify-between pt-2">
                   <span className="text-sm text-muted-foreground">
-                    {course.lessons} lessons
+                    {course.lessons?.[0]?.count || 0} lessons
                   </span>
                   <Button variant="ghost" className="text-primary hover:text-primary/80">
                     View Course →
