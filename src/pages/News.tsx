@@ -11,6 +11,8 @@ interface NewsItem {
 
 export default function News() {
   const [news, setNews] = useState<NewsItem[]>([]);
+  const s = 3
+  console.log(s)
 
   useEffect(() => {
     fetchNews();
@@ -38,7 +40,7 @@ export default function News() {
     <div className="min-h-screen bg-background pt-24 pb-12 px-4">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-8">News & Updates</h1>
-        
+
         <div className="space-y-6">
           {news.length === 0 ? (
             <Card>
