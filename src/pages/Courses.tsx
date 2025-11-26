@@ -28,7 +28,7 @@ const Courses = () => {
     const { data } = await supabase
       .from('courses')
       .select('*, lessons(count)');
-    
+
     if (data) setCourses(data as any);
   };
 
@@ -51,7 +51,7 @@ const Courses = () => {
   };
 
   return (
-    <div className="min-h-screen py-12">
+    <div className="min-h-screen py-12 pt-24">
       <div className="container mx-auto px-4">
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Explore Courses</h1>
@@ -71,13 +71,13 @@ const Courses = () => {
               className="pl-10 h-12 text-base"
             />
           </div>
-          
+
         </div>
 
         {/* Course Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredCourses.map((course) => (
-            <Card 
+            <Card
               key={course.id}
               className="p-6 hover:shadow-hover transition-all duration-300 hover:-translate-y-1 cursor-pointer border-border/50"
               onClick={() => navigate(`/course/${course.id}`)}
@@ -89,11 +89,11 @@ const Courses = () => {
                     {course.difficulty}
                   </Badge>
                 </div>
-                
+
                 <p className="text-muted-foreground line-clamp-2">
                   {course.description}
                 </p>
-                
+
                 <div className="flex items-center justify-between pt-2">
                   <span className="text-sm text-muted-foreground">
                     {course.lessons?.[0]?.count || 0} lessons
