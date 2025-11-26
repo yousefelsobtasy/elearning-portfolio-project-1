@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Heart, MessageCircle, Send } from 'lucide-react';
-import Comments from '@/components/comments';
+import Comments from '@/components/Comments';
 
 const Post = ({ post }) => {
     const { user } = useAuth();
