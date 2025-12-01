@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { FlaskConical, Users, Sparkles } from "lucide-react";
+import { FlaskConical, Users, Sparkles, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-learning.jpg";
 
@@ -26,7 +26,7 @@ const Landing = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-hero py-20 md:py-32">
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
@@ -39,8 +39,8 @@ const Landing = () => {
               <p className="text-lg md:text-xl text-white/90 max-w-lg">
                 Explore the fascinating world of chemistry through interactive courses designed to make learning engaging and accessible.
               </p>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="secondary"
                 className="text-lg px-8 shadow-hover hover:scale-105 transition-transform"
                 onClick={() => navigate("/courses")}
@@ -49,9 +49,9 @@ const Landing = () => {
               </Button>
             </div>
             <div className="relative">
-              <img 
-                src={heroImage} 
-                alt="Students learning online" 
+              <img
+                src={heroImage}
+                alt="Students learning online"
                 className="rounded-2xl shadow-2xl w-full"
               />
             </div>
@@ -67,7 +67,7 @@ const Landing = () => {
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
             {features.map((feature, index) => (
-              <Card 
+              <Card
                 key={index}
                 className="p-8 text-center hover:shadow-hover transition-all duration-300 hover:-translate-y-1 border-border/50"
               >
@@ -91,8 +91,8 @@ const Landing = () => {
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             Join fellow students in discovering the wonders of chemistry. Start your journey today!
           </p>
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="text-lg px-8 bg-gradient-card shadow-soft hover:shadow-hover transition-all"
             onClick={() => navigate("/courses")}
           >
@@ -100,6 +100,31 @@ const Landing = () => {
           </Button>
         </div>
       </section>
+
+      {/* Footer Section */}
+      <footer className="mt-auto py-8 border-t border-border/50 bg-background/50">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center justify-center space-y-4">
+            <div className="flex items-center justify-center gap-2 text-muted-foreground">
+              <span>Made with</span>
+              <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" />
+              <span>by</span>
+              <a href="https://makethemlearn.netlify.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                make them learn
+              </a>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              © 2025. All rights reserved.
+            </p>
+            <p className="text-xs text-muted-foreground/70 text-center max-w-md">
+              Chemistry Hub is dedicated to transforming chemistry education through innovative teaching methods and interactive learning experiences.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
