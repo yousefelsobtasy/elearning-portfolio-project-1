@@ -261,6 +261,99 @@ export type Database = {
         }
         Relationships: []
       }
+      tasks: {
+        Row: {
+          id: string
+          profile_id: string
+          title: string
+          description: string | null
+          start_time: string | null
+          end_time: string | null
+          status: 'todo' | 'working_on' | 'done'
+          created_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          profile_id: string
+          title: string
+          description?: string | null
+          start_time?: string | null
+          end_time?: string | null
+          status?: 'todo' | 'working_on' | 'done'
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          profile_id?: string
+          title?: string
+          description?: string | null
+          start_time?: string | null
+          end_time?: string | null
+          status?: 'todo' | 'working_on' | 'done'
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      lesson_completions: {
+        Row: {
+          id: string
+          profile_id: string
+          lesson_id: string
+          course_id: string
+          completed_at: string | null
+          created_at: string | null
+        }
+        Insert: {
+          id?: string
+          profile_id: string
+          lesson_id: string
+          course_id: string
+          completed_at?: string | null
+          created_at?: string | null
+        }
+        Update: {
+          id?: string
+          profile_id?: string
+          lesson_id?: string
+          course_id?: string
+          completed_at?: string | null
+          created_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lesson_completions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_completions_lesson_id_fkey"
+            columns: ["lesson_id"]
+            isOneToOne: false
+            referencedRelation: "lessons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lesson_completions_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -276,6 +369,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      task_status: 'todo' | 'working_on' | 'done'
     }
     CompositeTypes: {
       [_ in never]: never

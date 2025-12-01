@@ -11,6 +11,8 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
   loading: boolean;
+  focusMode: boolean;
+  toggleFocusMode: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -20,6 +22,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [focusMode, setFocusMode] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -102,11 +105,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signOut = async () => {
     await supabase.auth.signOut();
     setIsAdmin(false);
+    setFocusMode(false);
     navigate('/auth');
   };
 
+  const toggleFocusMode = () => {
+    setFocusMode(!focusMode);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, session, isAdmin, signUp, signIn, signOut, loading }}>
+    <AuthContext.Provider value={{
+      user,
+      session,
+      isAdmin,
+      signUp,
+      signIn,
+      signOut,
+      loading,
+      focusMode,
+      toggleFocusMode
+    }}>
       {children}
     </AuthContext.Provider>
   );
