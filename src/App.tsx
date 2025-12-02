@@ -7,7 +7,6 @@ import { ThemeProvider } from "next-themes";
 import Landing from "./pages/Landing";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
-import LessonViewer from "./pages/LessonViewer";
 import Community from "./pages/Community";
 import News from "./pages/News";
 import Admin from "./pages/Admin";
@@ -17,7 +16,6 @@ import Navigation from "./components/Navigation";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import LessonLayout from "@/pages/LessonLayout";
-import CurrentLesson from "@/components/CurrentLesson";
 import { CourseProvider } from "@/contexts/CourseContext";
 
 const queryClient = new QueryClient();
