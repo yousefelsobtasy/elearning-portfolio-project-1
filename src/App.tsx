@@ -35,7 +35,7 @@ const App = () => (
               <Routes>
                 <Route path="/auth" element={<Auth />} />
                 <Route index element={<ProtectedRoute><Landing /></ProtectedRoute>} />
-                <Route path="/courses" element={<Courses />} />
+                <Route path="/courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
                 <Route path="/course/:courseId" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
                 <Route path="/course/:courseId/lesson/:lessonId" element={<ProtectedRoute><LessonLayout /></ProtectedRoute>} />
                 <Route path="/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
