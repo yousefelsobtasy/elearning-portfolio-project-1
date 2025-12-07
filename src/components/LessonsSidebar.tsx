@@ -25,19 +25,19 @@ const LessonsSidebar = ({ lessons, courseId, completedLessons, setCompletedLesso
   };
 
   return (
-    <Card className="p-4 sm:p-6 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-border/50 shadow-soft">
+    <Card className="p-4 xl:p-6 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-border/50 shadow-soft">
       {/* Header with collapsible icon for mobile */}
       <div
-        className="flex items-center justify-between cursor-pointer sm:cursor-default mb-4"
+        className="flex items-center justify-between cursor-pointer xl:cursor-default mb-4"
         onClick={toggleCollapse}
       >
         <div className="flex items-center gap-3">
           <h3 className="font-bold text-lg text-foreground">Course Lessons</h3>
-          <span className="hidden sm:inline text-sm text-muted-foreground">
+          {/* <span className="hidden xl:inline text-sm text-muted-foreground">
             ({completedLessons?.length || 0} of {lessons?.length || 0} completed)
-          </span>
+          </span> */}
         </div>
-        <div className="sm:hidden">
+        <div className="xl:hidden">
           {isCollapsed ? (
             <ChevronDown className="w-5 h-5 text-muted-foreground" />
           ) : (
@@ -46,20 +46,12 @@ const LessonsSidebar = ({ lessons, courseId, completedLessons, setCompletedLesso
         </div>
       </div>
 
-      {/* Progress text - desktop only */}
-      <p className="hidden sm:block text-sm text-muted-foreground mb-4">
+      <p className="text-sm text-muted-foreground mb-4">
         {completedLessons?.length || 0} of {lessons?.length || 0} completed
       </p>
 
-      {/* Progress text - mobile only (when collapsed) */}
-      {isCollapsed && (
-        <p className="sm:hidden text-sm text-muted-foreground mb-4">
-          {completedLessons?.length || 0} of {lessons?.length || 0} completed
-        </p>
-      )}
-
       {/* Lessons list - collapsible on mobile */}
-      <div className={`${isCollapsed ? 'hidden sm:block' : 'block'}`}>
+      <div className={`${isCollapsed ? 'hidden xl:block' : 'block'}`}>
         <div className="space-y-2">
           {lessons?.map((lesson, index) => {
             const completed = isLessonCompleted(lesson.id);
