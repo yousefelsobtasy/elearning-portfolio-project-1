@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import LessonsSidebar from "@/components/LessonSidebar";
+import LessonsSidebar from "@/components/LessonsSidebar";
 import TasksSidebar from "@/components/TasksSidebar";
 import { ArrowLeft, CheckCircle, BookOpen, Clock } from "lucide-react";
 import LessonProgress from "@/components/LessonProgress";
